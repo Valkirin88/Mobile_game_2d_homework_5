@@ -183,12 +183,10 @@ namespace BattleScripts
             ShowMessages(color, message);
         }
 
-     
 
         private void Update()
         {
             ShowPassFightAndFightButtons();
-
         }
 
 
