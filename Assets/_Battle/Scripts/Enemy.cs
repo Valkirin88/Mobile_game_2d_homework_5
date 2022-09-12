@@ -19,7 +19,7 @@ namespace BattleScripts
         private int _healthPlayer;
         private int _powerPlayer;
 
-
+        
         public Enemy(string name) =>
             _name = name;
 
@@ -50,11 +50,12 @@ namespace BattleScripts
             float moneyRatio = _moneyPlayer / KMoney;
             float powerRatio = _powerPlayer / KPower;
 
-            return (int)(moneyRatio + kHealth + powerRatio);
+            float _enemyPowerRatio = Random.Range(0.8f, 1.1f);
+            return (int)((_healthPlayer + _powerPlayer) * _enemyPowerRatio);
         }
 
         private int CalcKHealth() =>
-            _healthPlayer > MaxHealthPlayer ? 100 : 5;
+            _healthPlayer > MaxHealthPlayer ? _healthPlayer : 0;
     }
 }
 

@@ -42,6 +42,7 @@ namespace BattleScripts
         private PlayerData _crime;
 
         private Enemy _enemy;
+        private bool isPassed;
 
 
         private void Start()
@@ -164,8 +165,12 @@ namespace BattleScripts
 
 
         private void PassFight()
-        {   
+        {   isPassed = true; 
             _fightButton.gameObject.SetActive(false);
+            _passFightButton.gameObject.SetActive(false); 
+            string color = "#07FF00";
+            string message = "Passed";
+            ShowMessages(color, message);
         }
 
         private void Fight()
@@ -175,9 +180,10 @@ namespace BattleScripts
 
             string color = isVictory ? "#07FF00" : "#FF0000";
             string message = isVictory ? "Win" : "Lose";
-
-            Debug.Log($"<color={color}>{message}!!!</color>");
+            ShowMessages(color, message);
         }
+
+     
 
         private void Update()
         {
@@ -188,9 +194,14 @@ namespace BattleScripts
 
         private void ShowPassFightAndFightButtons()
         {
-            if (!CheckCrime())
+            if (!CheckCrime() && !isPassed)
             {
                 _passFightButton.gameObject.SetActive(true);
+            }
+
+            else if(isPassed)
+            {
+                _passFightButton.gameObject.SetActive(false);
                 _fightButton.gameObject.SetActive(false);
             }
 
@@ -208,6 +219,11 @@ namespace BattleScripts
                 return true;
             else
                 return false;
+        }
+
+        private void ShowMessages(string color, string message)
+        {
+            Debug.Log($"<color={color}>{message}!!!</color>");
         }
     }
 }
